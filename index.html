@@ -734,7 +734,7 @@ body.en p[data-en], body.en div[data-en], body.en li[data-en] { display:block !i
       <div class="office-banner banner-page">IT IS THE RSVP.</div>
     </div>
     <p style="font-size:13px;color:var(--text-muted);max-width:480px;line-height:1.7;margin-top:4px;">
-      <span data-it>Vi chiediamo di confermare la vostra presenza entro il <strong>20 agosto 2026</strong>.</span><span data-en>Please confirm your attendance by <strong>20 August 2026</strong>.</span>
+      <span data-it>Vi chiediamo di confermare la vostra presenza entro il <strong>15 Luglio 2026</strong>.</span><span data-en>Please confirm your attendance by <strong>15 July 2026</strong>.</span>
     </p>
   </div>
   <div class="page-body">
@@ -954,13 +954,13 @@ function submitRsvp() {
   form.append('bambini',     document.querySelector('input[name="bambini"]:checked')?.value||'');
   form.append('venerdi',     checks[5]?.checked ? 'si' : '');
   form.append('domenica',    checks[6]?.checked ? 'si' : '');
-  const presenzaVal = presenza.value;
+  const presenzaVal = document.querySelector('input[name="presenza"]:checked')?.value || '';
   fetch('https://script.google.com/macros/s/AKfycbw_YA1LDxPnvv_ujfTBPi8spTi8kYulWBO_10aY812HNrAy0ipdWnAxeR7PZHWtgy35/exec', { method:'POST', mode:'no-cors', body:form })
     .finally(() => {
       document.getElementById('rsvp-form').style.display = 'none';
       const successDiv = document.getElementById('rsvp-success');
       successDiv.style.display = 'block';
-      if (presenzaVal === 'si') {
+      if (presenzaVal === 'si' || presenzaVal === 'Sì' || presenzaVal === 'yes') {
         document.getElementById('rsvp-yes-content').style.display = 'block';
         document.getElementById('rsvp-no-content').style.display = 'none';
       } else {
